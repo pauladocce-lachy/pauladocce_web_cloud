@@ -93,7 +93,7 @@ async function serveStatic(req,res,urlPath) {
   if (decoded==='/') decoded='/index.html';
   const file=path.resolve(ROOT,'.'+decoded);
   if (!file.startsWith(ROOT+path.sep)) { json(res,404,{error:'Nenalezeno.'}); return; }
-  try { const stat=await fs.stat(file); if (!stat.isFile()) throw Object.assign(new Error(),{code:'ENOENT'}); res.writeHead(200,{'Content-Type':mime(file),'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','X-Frame-Options':'DENY','Content-Security-Policy':"default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-src 'self' https://www.google.com https://maps.google.com https://widgets.sociablekit.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'" }
+ try { const stat=await fs.stat(file); if (!stat.isFile()) throw Object.assign(new Error(),{code:'ENOENT'}); res.writeHead(200,{'Content-Type':mime(file),'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','X-Frame-Options':'DENY','Content-Security-Policy':"default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",'Content-Length':stat.size}); fsNative.createReadStream(file).pipe(res); }
   catch (error) { if (res.headersSent) { res.destroy(error); return; } json(res,404,{error:'Nenalezeno.'}); }
 }
 async function handle(req,res) {
