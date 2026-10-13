@@ -1,0 +1,14 @@
+{
+  "name": "pauladocce-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Paula Docce website with self-hosted JSON persistence and admin API",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check js/api.js && node --check js/homePricing.js && node --check js/pricing.js && node --check admin/js/auth.js && node --check admin/js/dashboard.js && node --check admin/js/feedback.js && node --check admin/js/pricing.js && node --check scripts/import-data.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

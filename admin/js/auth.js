@@ -1,0 +1,2 @@
+const form=document.getElementById('loginForm');
+if(form) form.addEventListener('submit',async e=>{e.preventDefault();const button=form.querySelector('button[type="submit"]');button.disabled=true;try{await api.login(document.getElementById('email').value,document.getElementById('password').value);window.location.href='dashboard.html';}catch(error){alert(error.message||'Přihlášení se nezdařilo.');}finally{button.disabled=false;}});
